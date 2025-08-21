@@ -1,0 +1,7 @@
+replicaCount: 2
+image:
+  repository: intellisec/backend
+  tag: latest
+service:
+  type: ClusterIP
+  port: 80

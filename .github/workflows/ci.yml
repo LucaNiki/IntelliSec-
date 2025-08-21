@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:20.10.21
+        options: --privileged
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install backend deps
+        working-directory: ./backend
+        run: npm ci
+      - name: Run backend lint/test (placeholder)
+        working-directory: ./backend
+        run: echo "No tests yet"
+      - name: Build frontend
+        working-directory: ./frontend
+        run: |
+          npm ci
+          npm run build
+      - name: Build and push Docker images (optional)
+        if: ${{ github.event_name == 'push' }}
+        run: echo "Add docker image build/push steps here"

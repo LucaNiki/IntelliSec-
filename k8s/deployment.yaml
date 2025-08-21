@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intellisec-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: intellisec-backend
+  template:
+    metadata:
+      labels:
+        app: intellisec-backend
+    spec:
+      containers:
+        - name: backend
+          image: intellisec/backend:latest
+          ports:
+            - containerPort: 4000

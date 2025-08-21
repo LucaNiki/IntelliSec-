@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: intellisec-backend
+spec:
+  selector:
+    app: intellisec-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4000
+  type: ClusterIP
